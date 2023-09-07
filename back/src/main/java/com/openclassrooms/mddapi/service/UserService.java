@@ -22,4 +22,16 @@ public class UserService {
 		userRepository.deleteById(userId);
 		
 	}
+	
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email).orElse(null);
+	}
+	
+	public boolean existByEmail(String email) {
+		return userRepository.existsByEmail(email);
+	}
+	
+	public void register(User user) {
+		userRepository.save(user);
+	}
 }
