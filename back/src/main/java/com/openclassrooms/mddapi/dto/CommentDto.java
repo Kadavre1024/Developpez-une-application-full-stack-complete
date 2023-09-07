@@ -14,14 +14,12 @@ public class CommentDto {
 	private Long id;
 	
 	@NonNull
-	private String title;
-	
-	@NonNull
 	private String text;
 	
 	@NonNull
 	private Long user_id;
 	
+	@NonNull
 	private Long post_id;
 	
 	private LocalDateTime createdAt;
