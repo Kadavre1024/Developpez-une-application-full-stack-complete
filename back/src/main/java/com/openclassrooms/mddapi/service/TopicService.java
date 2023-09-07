@@ -20,5 +20,9 @@ public class TopicService implements ITopicService {
 	public List<Topic> getTopics() {
 		return topicRepository.findAll();
 	}
+
+	public Topic findById(Long topic_id) {
+		return topicRepository.findById(topic_id).orElse(null);
+	}
 	
 }

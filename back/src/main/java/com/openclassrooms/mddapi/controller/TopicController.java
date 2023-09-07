@@ -2,16 +2,21 @@ package com.openclassrooms.mddapi.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.model.Topic;
+import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.service.ITopicService;
 
 @RestController
 @RequestMapping("/topic")
 public class TopicController {
+	
+	@Autowired
+	private TopicMapper topicMapper;
 	
 	private ITopicService topicService;
 	
@@ -20,8 +25,8 @@ public class TopicController {
 	}
 
 	@GetMapping
-	public List<Topic> getTopics() {
-		return topicService.getTopics();
+	public List<TopicDto> getTopics() {
+		return topicMapper.toDto(topicService.getTopics());
 	}
 	
 	

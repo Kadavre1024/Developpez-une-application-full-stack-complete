@@ -1,14 +1,33 @@
 package com.openclassrooms.mddapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.*;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Entity
-@Table(name = "topics")
+@Data
+@Accessors(chain = true)
+@EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(of = {"id"})
+@Builder
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+@ToString
+@Table(name = "TOPICS")
 public class Topic {
 
 	@Id
@@ -16,23 +35,15 @@ public class Topic {
 	@Column(name = "topic_id")
 	private Long id;
 	
+	@NonNull
 	@Column(nullable = false)
 	private String name;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "SUBSCRIBE",
+            joinColumns = @JoinColumn( name = "topic_id" ),
+            inverseJoinColumns = @JoinColumn( name = "user_id" ) )
+	private List<User> users;
 	
 }
