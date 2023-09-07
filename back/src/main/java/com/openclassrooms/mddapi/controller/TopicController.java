@@ -12,7 +12,7 @@ import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.service.ITopicService;
 
 @RestController
-@RequestMapping("/topic")
+@RequestMapping("api/topic")
 public class TopicController {
 	
 	@Autowired

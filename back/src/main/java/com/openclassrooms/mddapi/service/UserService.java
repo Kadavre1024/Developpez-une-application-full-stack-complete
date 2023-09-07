@@ -14,7 +14,12 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public User findById(Long user_id) {
-		return userRepository.findById(user_id).orElse(null);
+	public User findById(Long userId) {
+		return userRepository.findById(userId).orElse(null);
+	}
+
+	public void delete(long userId) {
+		userRepository.deleteById(userId);
+		
 	}
 }
