@@ -36,7 +36,8 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                		.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+                		.antMatchers("/api/**").permitAll()
+                		//.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
