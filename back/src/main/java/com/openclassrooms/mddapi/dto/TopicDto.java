@@ -2,8 +2,6 @@ package com.openclassrooms.mddapi.dto;
 
 import java.util.List;
 
-import com.openclassrooms.mddapi.model.User;
-
 import lombok.*;
 
 @Data
@@ -15,6 +13,9 @@ public class TopicDto {
 	
 	@NonNull
 	private String name;
+	
+	@NonNull
+	private String description;
 	
 	private List<Long> users;
 }

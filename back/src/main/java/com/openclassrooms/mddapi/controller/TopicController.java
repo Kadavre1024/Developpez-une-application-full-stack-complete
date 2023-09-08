@@ -25,8 +25,9 @@ public class TopicController {
 	@Autowired
 	private ITopicService topicService;
 
-	@GetMapping
+	@GetMapping("/all")
 	public List<TopicDto> getTopics() {
+		System.out.println(topicService.getTopics());
 		return topicMapper.toDto(topicService.getTopics());
 	}
 	

@@ -50,7 +50,7 @@ public class Post {
 	private String text;
 	
 	@OneToOne
-	@JoinColumn(name = "topic_id", referencedColumnName = "topic_id")
+	@JoinColumn(name = "topic_id", referencedColumnName = "id")
 	private Topic topic;
 	
 	@OneToOne

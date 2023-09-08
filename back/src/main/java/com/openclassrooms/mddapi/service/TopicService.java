@@ -27,10 +27,12 @@ public class TopicService implements ITopicService {
 		return topicRepository.findAll();
 	}
 
+	@Override
 	public Topic findById(Long topic_id) {
 		return topicRepository.findById(topic_id).orElse(null);
 	}
 	
+	@Override
 	public void subscribe(Long id, Long userId) {
         Topic topic = this.topicRepository.findById(id).orElse(null);
         User user = this.userRepository.findById(userId).orElse(null);
@@ -48,6 +50,7 @@ public class TopicService implements ITopicService {
         this.topicRepository.save(topic);
     }
 
+	@Override
     public void unSubscribe(Long id, Long userId) {
         Topic topic = this.topicRepository.findById(id).orElse(null);
         if (topic == null) {

@@ -14,14 +14,17 @@ public class PostService implements IPostService {
 	@Autowired
 	private PostRepository postRepository;
 	
+	@Override
 	public List<Post> findAll() {
 		return postRepository.findAll();
 	}
 
+	@Override
 	public Post findById(Long post_id) {
 		return postRepository.findById(post_id).orElse(null);
 	}
 	
+	@Override
 	public Post create(Post post) {
 		return postRepository.save(post);
 	}

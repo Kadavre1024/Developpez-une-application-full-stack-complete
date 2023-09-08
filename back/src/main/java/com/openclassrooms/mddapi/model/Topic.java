@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
@@ -32,12 +31,15 @@ public class Topic {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "topic_id")
+	//@Column(name = "topic_id")
 	private Long id;
 	
 	@NonNull
 	@Column(nullable = false)
 	private String name;
+	
+	@NonNull
+	private String description;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
