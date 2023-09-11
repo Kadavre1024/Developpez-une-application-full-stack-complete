@@ -17,13 +17,6 @@ mat-card{
     grid-auto-columns: 50%;
     grid-gap: 20px;
     padding: 10px;
-    /**display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    align-content: stretch;
-    align-items: stretch;
-    justify-content: flex-start;**/
   }
 
   button{
