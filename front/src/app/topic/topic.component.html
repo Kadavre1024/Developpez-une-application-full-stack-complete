@@ -1,1 +1,22 @@
-<p>topic works!</p>
+    <div class="flexbox" (window:resize)="handleSize($event)" [ngStyle]="{'grid-template-columns':'repeat('+ mybreakpoint +', 1fr)'}">
+        <div *ngFor="let topic of (topics$ | async)" >
+            <mat-card>
+                <mat-card-title>{{topic.name}}</mat-card-title>
+                <mat-card-content [ngStyle]="{'height': descriptionHeightView +'px'}">
+                    <p class="ellipsis" [ngStyle]="{'-webkit-line-clamp': descriptionRowsView}"><b>Description :</b> {{topic.description}}</p>
+                </mat-card-content>
+                <mat-card-actions >
+                    <div class="subscribe">
+                        <button *ngIf="!isAlreadySubscribe(topic.users)" mat-raised-button color="primary" (click)="subscribe(topic.id!)">
+                        <span class="ml1">S'abonner</span>
+                        </button>
+                        <button *ngIf="isAlreadySubscribe(topic.users)" mat-raised-button color="warn" (click)="unSubscribe(topic.id!)">
+                        <span class="ml1">Se désabonner</span>
+                        </button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+  
