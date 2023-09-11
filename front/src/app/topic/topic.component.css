@@ -1,0 +1,29 @@
+mat-card{
+    background-color: beige;
+}
+.ellipsis {
+    display: -webkit-box;
+    max-width:fit-content;
+    text-align: justify;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .flexbox{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-columns: 50%;
+    grid-gap: 20px;
+    padding: 10px;
+  }
+
+  button{
+    width: 150px;
+  }
+
+  .subscribe{
+    text-align: center; 
+    vertical-align: bottom;
+  }
