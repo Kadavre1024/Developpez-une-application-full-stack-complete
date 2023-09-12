@@ -1,0 +1,12 @@
+.list-horizontal {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+   }
+
+   .list-vertical {
+    display: flex;
+    flex-direction: column;
+    float:right;
+    height: max-content;
+   }

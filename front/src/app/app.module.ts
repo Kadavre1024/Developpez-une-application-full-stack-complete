@@ -13,13 +13,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { TopicComponent } from './topic/topic.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopicComponent
+    TopicComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { TopicComponent } from './topic/topic.component';
     MatInputModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule,
+    MatListModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
