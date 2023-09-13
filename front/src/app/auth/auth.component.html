@@ -1,0 +1,31 @@
+<div (window:resize)="handleSize($event)">
+    <div class="header" *ngIf="!smallScreen">
+        <img mat-list-item src="/assets/logo_p6.png" alt="MDD">
+    </div>
+    <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="title">
+        <img *ngIf="smallScreen" mat-list-item src="/assets/logo_p6.png" alt="MDD">
+        <h1 *ngIf="funct=='register'; else title">Inscription</h1>
+        <ng-template #title><h1 class="title">Connexion</h1></ng-template>
+    </div>
+    <div class="center form">
+        <form class="center" [formGroup]="form" (ngSubmit)="submit()">
+            <mat-form-field *ngIf="funct=='register'">
+                <input matInput placeholder="Name" formControlName="username">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+                <span *ngIf="funct=='register'; else login">S'inscrire</span>
+                <ng-template #login>Se connecter</ng-template>
+            </button>
+            <span *ngIf="onError" class="error">Une erreur s'est produite</span>
+        </form>
+    </div>
+</div>

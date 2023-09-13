@@ -19,30 +19,44 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { TopicComponent } from './topic/topic.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AuthComponent } from './auth/auth.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
+import { AppRoutingModule } from './app-routing.module';
+
+const materialModules = [
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatSnackBarModule,
+  MatSelectModule,
+  MatGridListModule,
+  MatMenuModule,
+  MatListModule,
+  MatSidenavModule
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     TopicComponent,
-    NavbarComponent
+    NavbarComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
+    AppRoutingModule, 
     HttpClientModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatListModule,
-    MatSidenavModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ...materialModules
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

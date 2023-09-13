@@ -1,0 +1,50 @@
+.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+img{
+    width: 418px; 
+    height: 234px; 
+    margin-bottom: 30px;
+}
+
+button{
+    width: 150px; 
+    height: 30px; 
+    font-size: 16px;
+}
+#login{
+    margin-right: 50px;
+}
+
+#register{
+    margin-left: 50px;
+}
+
+@media only screen and (max-width: 600px){
+    .authButtons{
+        display: grid;
+        grid-template-columns: 1;
+    }
+
+    #login{
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    #register{
+        margin-left: 0;
+    }
+
+    img{
+        width: 230px; 
+        height: 130px; 
+        margin-bottom: 30px;
+    }
+
+    
+  }
