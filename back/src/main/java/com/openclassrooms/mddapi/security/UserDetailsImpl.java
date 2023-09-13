@@ -23,13 +23,11 @@ public class UserDetailsImpl implements UserDetails {
 
   private String username;
 
-  private String firstName;
-
-  private String lastName;
+  private String name;
 
   private Boolean admin;
 
-  @JsonIgnore
+  //@JsonIgnore
   private String password;  
   
   public Collection<? extends GrantedAuthority> getAuthorities() {        

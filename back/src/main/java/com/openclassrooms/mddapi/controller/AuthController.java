@@ -24,6 +24,7 @@ import com.openclassrooms.mddapi.payload.LoginRequest;
 import com.openclassrooms.mddapi.payload.MessageResponse;
 import com.openclassrooms.mddapi.payload.RegisterRequest;
 import com.openclassrooms.mddapi.security.JwtUtil;
+import com.openclassrooms.mddapi.security.UserDetailsImpl;
 import com.openclassrooms.mddapi.security.UserDetailsServiceImpl;
 import com.openclassrooms.mddapi.service.UserService;
 
@@ -67,10 +68,10 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
+        final UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(authentication.getName());
         String jwt = jwtUtil.generateToken(userDetails.getUsername());
         
-		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername()));
+		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getId(), userDetails.getName(), userDetails.getPassword()));
 	}
 	
 	

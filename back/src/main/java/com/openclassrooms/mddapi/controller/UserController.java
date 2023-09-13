@@ -5,11 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.payload.UserUpdateRequest;
 import com.openclassrooms.mddapi.service.UserService;
 
 @RestController
@@ -30,6 +33,25 @@ public class UserController {
             if (user == null) {
                 return ResponseEntity.notFound().build();
             }
+
+            return ResponseEntity.ok().body(mapper.toDto(user));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+	
+	@PutMapping("/{id}")
+    public ResponseEntity<?> updateById(@PathVariable("id") String id, @RequestBody UserUpdateRequest updatedUser) {
+        try {
+            User user = service.findById(Long.valueOf(id));
+
+            if (user == null) {
+                return ResponseEntity.notFound().build();
+            }
+            
+            user.setUserName(updatedUser.getUserName());
+            user.setEmail(updatedUser.getEmail());
+            service.register(user);
 
             return ResponseEntity.ok().body(mapper.toDto(user));
         } catch (NumberFormatException e) {
