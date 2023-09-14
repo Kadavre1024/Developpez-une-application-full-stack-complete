@@ -20,6 +20,7 @@ export class SessionService {
 
   public logIn(user: AuthSuccess): void {
     this.user = user;
+    localStorage.setItem('token', user.token);
     this.isLogged = true;
     this.next();
   }

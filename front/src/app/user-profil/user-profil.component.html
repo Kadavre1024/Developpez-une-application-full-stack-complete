@@ -1,0 +1,35 @@
+<div class="center form">
+    <h1>Profil utilisateur</h1>
+    <form class="center" [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field>
+            <input matInput placeholder="Name" formControlName="userName">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+            <span>Sauvegarder</span>
+        </button>
+        <span *ngIf="onError" class="error">Une erreur s'est produite</span>
+        <a class="disconnect" role="button" (click)="disconnect()">Se déconnecter</a>
+    </form>
+</div>
+<div class="separator"></div>
+<h2>Abonnements</h2>
+<div class="flexbox" (window:resize)="handleSize($event)" [ngStyle]="{'grid-template-columns':'repeat('+ mybreakpoint +', 1fr)'}">
+    <div *ngFor="let topic of (topics$ | async)" >
+        <mat-card>
+            <mat-card-title>{{topic.name}}</mat-card-title>
+            <mat-card-content [ngStyle]="{'height': descriptionHeightView +'px'}">
+                <p class="ellipsis" [ngStyle]="{'-webkit-line-clamp': descriptionRowsView}"><b>Description :</b> {{topic.description}}</p>
+            </mat-card-content>
+            <mat-card-actions >
+                <div class="subscribe">
+                    <button  mat-raised-button color="warn" (click)="unSubscribe(topic.id!)">
+                    <span class="ml1">Se désabonner</span>
+                    </button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
