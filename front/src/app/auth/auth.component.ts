@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Register } from './interfaces/register.interface';
 import { Login } from './interfaces/login.interface';
 import { AuthSuccess } from './interfaces/authSuccess.interface';
-import { User } from '../interfaces/user.interface';
 import { SessionService } from '../services/session.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-auth',
@@ -25,6 +25,7 @@ export class AuthComponent {
   constructor(private authService: AuthService,
               private sessionService: SessionService,
               private fb: FormBuilder,
+              private matSnackBar: MatSnackBar,
               private router: Router,
               private route: ActivatedRoute) { 
     router.events.subscribe((val) => {													// on url change, update Form
@@ -72,18 +73,19 @@ export class AuthComponent {
   public submit(): void {
     if(this.funct === "register"){
       const registerRequest = this.form.value as Register;
-      console.log("register : " + registerRequest.username + " "  + registerRequest.email + " " + registerRequest.password);
       this.authService.register(registerRequest).subscribe({
-        next: (_: void) => this.router.navigate(['/auth', 'login']),
+        next: (_: void) => {
+          this.matSnackBar.open("Registered Successfully !", 'Close', { duration: 3000 });
+          this.router.navigate(['/auth', 'login'])
+        },
         error: error => this.onError = true
       });
     }else{
       const loginRequest = this.form.value as Login;
-      console.log("login : " + loginRequest.email + " " + loginRequest.password);
       this.authService.login(loginRequest).subscribe({
         next: (response: AuthSuccess) => {
             this.sessionService.logIn(response);
-            this.router.navigate(['/topic'])
+            this.router.navigate(['/profil'])
         },
         error: error => this.onError = true
       });

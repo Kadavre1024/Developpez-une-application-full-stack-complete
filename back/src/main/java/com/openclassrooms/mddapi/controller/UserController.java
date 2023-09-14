@@ -2,6 +2,11 @@ package com.openclassrooms.mddapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.payload.JwtResponse;
+import com.openclassrooms.mddapi.payload.MessageResponse;
 import com.openclassrooms.mddapi.payload.UserUpdateRequest;
+import com.openclassrooms.mddapi.security.JwtUtil;
+import com.openclassrooms.mddapi.security.UserDetailsImpl;
+import com.openclassrooms.mddapi.security.UserDetailsServiceImpl;
 import com.openclassrooms.mddapi.service.UserService;
 
 @RestController
@@ -24,6 +34,18 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private AuthenticationManager authManager;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	@Autowired
+	private UserDetailsServiceImpl userDetailsService;
 	
 	@GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") String id) {
@@ -52,8 +74,8 @@ public class UserController {
             user.setUserName(updatedUser.getUserName());
             user.setEmail(updatedUser.getEmail());
             service.register(user);
-
-            return ResponseEntity.ok().body(mapper.toDto(user));
+            
+    		return ResponseEntity.ok().body(new MessageResponse("Successful update !"));
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
         }

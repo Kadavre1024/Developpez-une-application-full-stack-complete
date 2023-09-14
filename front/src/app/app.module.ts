@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
 import { AppRoutingModule } from './app-routing.module';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 
 const materialModules = [
   MatButtonModule,
@@ -44,7 +45,8 @@ const materialModules = [
     AppComponent,
     TopicComponent,
     NavbarComponent,
-    AuthComponent
+    AuthComponent,
+    UserProfilComponent
   ],
   imports: [
     BrowserModule,

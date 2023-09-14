@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { TopicComponent } from './topic/topic.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,14 @@ const routes: Routes = [
     component: AuthComponent
   },
   {
+    path: 'profil',
+    canActivate: [AuthGuard],
+    component: UserProfilComponent
+  },
+  {
     path: 'topic',
     canActivate: [AuthGuard],
-    component: NavbarComponent
+    component: TopicComponent
   }
 
 ];

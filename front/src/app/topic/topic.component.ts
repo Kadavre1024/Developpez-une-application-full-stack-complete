@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { TopicApiService } from "./services/topic-api.service";
 import { Topic } from "./interfaces/topic.interface";
 import { Observable } from "rxjs";
+import { SessionService } from "../services/session.service";
 
 @Component({
   selector: 'app-topic',
@@ -11,13 +12,14 @@ import { Observable } from "rxjs";
 export class TopicComponent {
 
   public topics$: Observable<Topic[]> = this.topicApiService.all();
-  public userId: number = 1;
+  public userId: number = this.sessionService.user!.id;
   public mybreakpoint: number = 1;
   public descriptionRowsView: number = 1;
   public descriptionHeightView: number = 40;
 
   constructor(
-    private topicApiService: TopicApiService
+    private topicApiService: TopicApiService,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit() {
