@@ -7,6 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { TopicComponent } from './topic/topic.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'topic',
     canActivate: [AuthGuard],
     component: TopicComponent
+  },
+  {
+    path: 'post/:id',
+    canActivate: [AuthGuard],
+    component: PostComponent
   }
 
 ];

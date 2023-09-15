@@ -60,11 +60,10 @@ button{
     margin-top: 20px;
     width: 150px; 
     height: 30px; 
-    font-size: 16px;
-    span{
-        vertical-align: middle;
-    }
-    
+    font-size: 16px;    
+}
+button span{
+    vertical-align: middle;
 }
 
 mat-form-field{

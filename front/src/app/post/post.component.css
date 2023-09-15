@@ -1,0 +1,55 @@
+mat-card-header {
+    margin-bottom: 20px;
+}
+
+.details{
+    font-size: small;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    vertical-align: middle;
+    max-width: 450px;
+}
+
+mat-card-content{
+    margin-bottom: 20px;
+    font-size: medium;
+}
+
+.separator{
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.margin{
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+.comment-title{
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+@media only screen and (max-width: 600px){
+    .details{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .margin{
+        margin-left: 10px;
+    }
+}

@@ -10,6 +10,7 @@ import { TopicApiService } from '../topic/services/topic-api.service';
 import { Topic } from '../topic/interfaces/topic.interface';
 import { MessageResponse } from '../interfaces/message-response.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthSuccess } from '../auth/interfaces/authSuccess.interface';
 
 @Component({
   selector: 'app-user-profil',
@@ -17,7 +18,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-profil.component.css']
 })
 export class UserProfilComponent implements OnInit {
-  public userProfil$: Observable<User> = this.userService.getUser();
+  public userAuth: AuthSuccess = this.sessionService.user!
+  public userProfil$: Observable<User> = this.userService.getUser(this.userAuth.id);
   public userId!: number;
   public topics$!: Observable<Topic[]>
   public onError: boolean = false;
@@ -48,7 +50,7 @@ export class UserProfilComponent implements OnInit {
       this.form.setValue({userName: u.userName, email: u.email})
       this.form.updateValueAndValidity();
     });
-    
+
     this.topicApiService.all().pipe(take(1)).subscribe((x) => this.getSubscribeTopicsForUser(x))
 
     this.mybreakpoint = (window.innerWidth <= 600) ? 1 : 2;

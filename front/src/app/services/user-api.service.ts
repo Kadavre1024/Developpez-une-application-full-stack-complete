@@ -23,8 +23,7 @@ export class UserApiService{
         return this.httpClient.put<MessageResponse>(`${this.pathService}/${this.userAuth.id}`, userDetailsUpdate);
     }
 
-    public getUser(): Observable<User> {
-        console.log("userAuthId : "+this.userAuth.id);
-        return this.httpClient.get<User>(`${this.pathService}/${this.userAuth.id}`);
+    public getUser(id:number): Observable<User> {
+        return this.httpClient.get<User>(`${this.pathService}/${id}`);
     }
 }

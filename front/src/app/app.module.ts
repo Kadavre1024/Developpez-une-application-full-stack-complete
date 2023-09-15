@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+import { PostComponent } from './post/post.component';
 
 const materialModules = [
   MatButtonModule,
@@ -46,7 +47,8 @@ const materialModules = [
     TopicComponent,
     NavbarComponent,
     AuthComponent,
-    UserProfilComponent
+    UserProfilComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
