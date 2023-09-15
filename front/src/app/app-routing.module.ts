@@ -5,7 +5,6 @@ import { UnauthGuard } from './auth/guards/unauth.guard';
 import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { TopicComponent } from './topic/topic.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { PostComponent } from './post/post.component';
 

@@ -1,0 +1,8 @@
+<mat-card>
+    <mat-card-content>
+        {{comment.text}}
+    </mat-card-content>
+    <mat-card-subtitle>
+        {{(user$ | async)?.userName}}
+    </mat-card-subtitle>
+</mat-card>

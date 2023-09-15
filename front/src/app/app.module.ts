@@ -18,7 +18,6 @@ import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { TopicComponent } from './topic/topic.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { AuthComponent } from './auth/auth.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +25,8 @@ import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { PostComponent } from './post/post.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentViewerComponent } from './comment-viewer/comment-viewer.component';
 
 const materialModules = [
   MatButtonModule,
@@ -45,10 +46,11 @@ const materialModules = [
   declarations: [
     AppComponent,
     TopicComponent,
-    NavbarComponent,
     AuthComponent,
     UserProfilComponent,
-    PostComponent
+    PostComponent,
+    CommentComponent,
+    CommentViewerComponent
   ],
   imports: [
     BrowserModule,

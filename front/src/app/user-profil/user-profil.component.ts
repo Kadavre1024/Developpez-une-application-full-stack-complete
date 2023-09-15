@@ -18,7 +18,7 @@ import { AuthSuccess } from '../auth/interfaces/authSuccess.interface';
   styleUrls: ['./user-profil.component.css']
 })
 export class UserProfilComponent implements OnInit {
-  public userAuth: AuthSuccess = this.sessionService.user!
+  public userAuth: User = this.sessionService.user!
   public userProfil$: Observable<User> = this.userService.getUser(this.userAuth.id);
   public userId!: number;
   public topics$!: Observable<Topic[]>

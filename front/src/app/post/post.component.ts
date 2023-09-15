@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
   public post$!: Observable<Post>;
   public author$!: Observable<User>;
   public topic$!: Observable<Topic>;
+  public postId: number = +this.route.snapshot.params['id'];
 
   constructor(
     private postService: PostService,
@@ -27,8 +28,7 @@ export class PostComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const postId = +this.route.snapshot.params['id'];
-    this.post$ = this.postService.getById(postId);
+    this.post$ = this.postService.getById(this.postId);
     this.post$.pipe(take(1)).subscribe(x => {
       this.author$ = this.userService.getUser(x.user_id);
       this.topic$ = this.topicApiService.detail(x.topic_id.toString())

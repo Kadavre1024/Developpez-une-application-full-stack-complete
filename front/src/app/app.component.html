@@ -19,7 +19,7 @@
                     <a mat-list-item routerLink="profil" style="width: 120px; height: 50px;"><img src="/assets/user.png" style="padding-left: 20%; width: 65%; height: 100%;"></a>
             </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
+        <mat-sidenav-content [ngStyle]="{'min-height': (windowHeight-65)+'px'}">
             <router-outlet></router-outlet>
         </mat-sidenav-content>
     </mat-sidenav-container>

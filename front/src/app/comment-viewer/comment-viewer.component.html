@@ -1,0 +1,9 @@
+<div class="commentView">
+    <app-comment *ngFor="let comment of (commentList$ | async)" [comment]="comment">guillaume</app-comment>
+</div>
+<div class="commentWritter">
+    <textarea matInput class="commentField" id="text" type="text" placeholder="Ecrivez ici votre commentaire" name="text" #text></textarea>
+    <a type="button" (click)="submit(text.value)">
+        <img src="/assets/send.png" alt="send">
+    </a>
+</div>

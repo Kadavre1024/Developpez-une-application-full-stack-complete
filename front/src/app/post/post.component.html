@@ -1,8 +1,8 @@
-<mat-card>
+
     <button mat-icon-button (click)="back()">
         <mat-icon>arrow_back</mat-icon>
     </button>
-    <mat-card-title class="title">{{(post$ | async)!.title}}</mat-card-title>
+    <mat-card-title class="title">{{(post$ | async)?.title}}</mat-card-title>
     <div class="margin">
         <mat-card-subtitle class="details">
             <p>{{((post$ | async)?.createdAt) | date: 'dd MMM yyyy'}}</p>
@@ -15,7 +15,7 @@
         <div class="separator"></div>
         <mat-card-title class="comment-title">Commentaires</mat-card-title>
         <mat-card-content>
-    
+            <app-comment-viewer [post$]="post$"></app-comment-viewer>
         </mat-card-content>
     </div>
-</mat-card>
+

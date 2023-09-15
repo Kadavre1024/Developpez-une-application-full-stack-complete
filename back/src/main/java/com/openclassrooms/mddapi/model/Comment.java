@@ -33,7 +33,7 @@ public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "comment_id")
+	@Column
 	private Long id;
 	
 	@NonNull

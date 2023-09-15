@@ -84,8 +84,14 @@ export class AuthComponent {
       const loginRequest = this.form.value as Login;
       this.authService.login(loginRequest).subscribe({
         next: (response: AuthSuccess) => {
-            this.sessionService.logIn(response);
-            this.router.navigate(['/profil'])
+            localStorage.setItem('token', response.token);
+            this.authService.me().subscribe({
+              next: (response) => {
+                this.sessionService.logIn(response);
+                this.router.navigate(['/profil'])
+              },
+              error: error => this.onError = true
+            })
         },
         error: error => this.onError = true
       });

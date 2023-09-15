@@ -12,8 +12,7 @@ import { MessageResponse } from "../interfaces/message-response.interface";
   })
 export class UserApiService{
 
-    private userAuth: AuthSuccess = this.sessionService.user!;
-    private user!: User;
+    private userAuth: User = this.sessionService.user!;
     private pathService = 'api/user';
 
     constructor(private httpClient: HttpClient,
