@@ -19,6 +19,8 @@ export class AuthComponent {
   public onError: boolean = false;
   public funct!: string;
   public halfScreen: number = 0;
+  public rememberMe: boolean = false;
+  public hide = true;
 
   public form : FormGroup = this.fb.group({});
 
@@ -38,12 +40,38 @@ export class AuthComponent {
     });
   }
 
+  public ngOnInit(): void {
+    if(localStorage.getItem('loginRegister')){
+      try{
+        this.rememberMe = true;
+        const loginRequest=JSON.parse(localStorage.getItem('loginRegister')!);
+        this.authService.login(loginRequest).subscribe({
+          next: (response: AuthSuccess) => {
+              localStorage.setItem('token', response.token);
+              this.authService.me().subscribe({
+                next: (response) => {
+                  this.sessionService.logIn(response);
+                  this.router.navigate(['/post'])
+                },
+                error: error => this.onError = true
+              })
+          },
+          error: error => this.onError = true
+        });
+
+      }catch{
+        this.rememberMe = false;
+      }
+    }
+  }
+
   public updateForm(): void{
     switch(this.funct){
       case "login":
         this.form = this.fb.group({
           email: ['', [Validators.required, Validators.email]],
-          password: ['', [Validators.required, Validators.min(6)]]
+          password: ['', [Validators.required, Validators.min(6)]],
+          rememberMe: [this.rememberMe]
         });
         break;
 
@@ -88,6 +116,9 @@ export class AuthComponent {
             this.authService.me().subscribe({
               next: (response) => {
                 this.sessionService.logIn(response);
+                if(this.form.controls['rememberMe'].value){
+                  localStorage.setItem('loginRegister', JSON.stringify(loginRequest));
+                }
                 this.router.navigate(['/profil'])
               },
               error: error => this.onError = true

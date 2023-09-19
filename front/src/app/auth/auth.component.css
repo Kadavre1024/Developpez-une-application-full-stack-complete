@@ -1,5 +1,4 @@
 .center {
-    height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,19 +21,23 @@ img{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: -20px;
+    margin-top: -10px;
+    margin-bottom: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-button{
+.submit{
     margin-top: 20px;
     width: 150px; 
-    height: 30px; 
-    font-size: 16px;
-    span{
-        vertical-align: middle;
-    }
-    
+    font-size: 16px;   
+    vertical-align: middle;
+}
+
+.rememberMe{
+    margin-top: 10px;
+}
+.rememberMe span{
+    margin-right: 5px;
 }
 
 mat-form-field{
@@ -55,8 +58,8 @@ mat-form-field{
         width: 180px;
     }
 
-    h1{
+    title{
         margin-top: -10px;
-        margin-bottom: -20px;
+        margin-bottom: 10px;
     }
 }
