@@ -1,9 +1,14 @@
 <div class="commentView">
-    <app-comment *ngFor="let comment of (commentList$ | async)" [comment]="comment">guillaume</app-comment>
+    <app-comment *ngFor="let comment of ((commentList$ | async)|slice:(paginator.pageIndex*paginator.pageSize):
+    ((paginator.pageIndex+1)*paginator.pageSize))" [comment]="comment"></app-comment>
+    <mat-paginator #paginator [length]="(commentList$ |async)?.length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
 </div>
 <div class="commentWritter">
-    <textarea matInput class="commentField" id="text" type="text" placeholder="Ecrivez ici votre commentaire" name="text" #text></textarea>
-    <a type="button" (click)="submit(text.value)">
+    <textarea matInput class="commentField" id="text" [(ngModel)]="newComment.text" type="text" placeholder="Ecrivez ici votre commentaire" name="text" #text></textarea>
+    <a type="button" (click)="submit()">
         <img src="/assets/send.png" alt="send">
     </a>
 </div>

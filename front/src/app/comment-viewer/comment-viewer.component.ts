@@ -25,6 +25,9 @@ export class CommentViewerComponent implements OnInit {
     createdAt: new Date()
   }
 
+  public pageSize: number = 5;
+  public pageSizeOptions: Array<number> = [5, 10, 25, 50];
+
   constructor(private commentService: CommentApiService,
               private sessionService: SessionService,
               private matSnackBar: MatSnackBar) { }
@@ -39,20 +42,18 @@ export class CommentViewerComponent implements OnInit {
     })
   }
 
-  public submit(text:string){
-    if(text !== ""){
-      console.log("text : "+text);
-      this.newComment.text = text;
-      this.commentService.create(this.newComment).subscribe({
+  public submit(){
+    if(this.newComment.text !== ""){
+      this.commentService.create(this.newComment).pipe(take(1)).subscribe({
         next: (response: Comment) => {
           this.newComment.text = "";
           this.ngOnInit();
-          this.matSnackBar.open("Commented Successfully !", 'Close', { duration: 3000 });
+          this.matSnackBar.open("Commentaire sauvegardé !", 'Close', { duration: 3000 });
         },
-        error: error => this.matSnackBar.open("An error occured", 'Close', { duration: 3000 })
+        error: error => this.matSnackBar.open("Une erreur est survenue", 'Close', { duration: 3000 })
       });
     }else{
-      this.matSnackBar.open("You need to write a comment before sending !", 'Close', { duration: 3000 });
+      this.matSnackBar.open("Veuillez écrire un commentaire !", 'Close', { duration: 3000 });
     }
   }
 }

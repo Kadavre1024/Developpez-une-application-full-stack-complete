@@ -16,6 +16,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatPaginatorModule } from '@angular/material/paginator'; 
 
 import { TopicComponent } from './topic/topic.component';
 import { AuthComponent } from './auth/auth.component';
@@ -42,6 +43,7 @@ const materialModules = [
   MatMenuModule,
   MatListModule,
   MatSidenavModule,
+  MatPaginatorModule
 ]
 
 @NgModule({
