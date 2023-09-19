@@ -9,7 +9,7 @@ import { User } from '../interfaces/user.interface';
 export class SessionService {
 
   public isLogged = localStorage.getItem('isLogged') ? true : false;
-  public user: User | undefined;
+  public user: User | undefined = localStorage.getItem('userAuth') ? JSON.parse(localStorage.getItem('userAuth')!) : undefined;;
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
@@ -20,12 +20,14 @@ export class SessionService {
   public logIn(user: User): void {
     this.user = user;
     this.isLogged = true;
+    localStorage.setItem('userAuth', JSON.stringify(this.user))
     localStorage.setItem('isLogged', this.isLogged.toString())
     this.next();
   }
 
   public logOut(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('userAuth');
     localStorage.removeItem('isLogged');
     this.user = undefined;
     this.isLogged = false;

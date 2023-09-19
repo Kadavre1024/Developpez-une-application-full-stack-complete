@@ -21,7 +21,7 @@ export class UserProfilComponent implements OnInit {
   public userAuth: User = this.sessionService.user!
   public userProfil$: Observable<User> = this.userService.getUser(this.userAuth.id);
   public userId!: number;
-  public topics$!: Observable<Topic[]>
+  public topics$!: Observable<Topic[]>;
   public onError: boolean = false;
   public mybreakpoint: number = 1;
   public descriptionRowsView: number = 1;
@@ -58,6 +58,15 @@ export class UserProfilComponent implements OnInit {
     this.descriptionHeightView = (window.innerWidth <= 600) ? 55 : 40;
   }
 
+  public disableSaveChangesBtn(): boolean{
+    if(!this.form.invalid){
+      if((this.form.controls['userName'].value !== this.userAuth.userName) || (this.form.controls['email'].value !== this.userAuth.email)){
+        return false;
+      }
+    }
+    return true;
+  }
+
   public submit(): void {
       const userUpdateRequest = this.form.value as UserUpdate;
       this.userService.update(userUpdateRequest).pipe(take(1)).subscribe({
@@ -71,6 +80,7 @@ export class UserProfilComponent implements OnInit {
 
   public disconnect(): void{
     this.sessionService.logOut();
+    localStorage.removeItem('loginRegister');
     this.matSnackBar.open("Session closed !", 'Close', { duration: 3000 });
     this.router.navigate(['/']);
   }

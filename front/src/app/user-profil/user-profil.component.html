@@ -2,12 +2,12 @@
     <h1>Profil utilisateur</h1>
     <form class="center" [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field>
-            <input matInput placeholder="Name" formControlName="userName">
+            <input matInput placeholder="Changer de nom" formControlName="userName">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Email" formControlName="email">
+            <input matInput placeholder="Changer d'email" formControlName="email">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        <button mat-raised-button color="primary" type="submit" [disabled]="disableSaveChangesBtn()">
             <span>Sauvegarder</span>
         </button>
         <span *ngIf="onError" class="error">Une erreur s'est produite</span>
@@ -26,7 +26,7 @@
             <mat-card-actions >
                 <div class="subscribe">
                     <button  mat-raised-button color="warn" (click)="unSubscribe(topic.id!)">
-                    <span class="ml1">Se désabonner</span>
+                        <span class="ml1">Se désabonner</span>
                     </button>
                 </div>
             </mat-card-actions>
