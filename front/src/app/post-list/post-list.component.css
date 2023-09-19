@@ -1,0 +1,53 @@
+.flexbox{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-columns: 50%;
+    grid-gap: 20px;
+    padding: 10px;
+}
+
+.toolKit{
+    display: inline-block;
+    width: 100%;
+}
+
+.details{
+    font-size: small;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    vertical-align: left;
+    max-width: 450px;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.margin{
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+.ellipsis {
+    display: -webkit-box;
+    max-width:fit-content;
+    text-align: justify;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+mat-card-content{
+    margin-bottom: 20px;
+    font-size: medium;
+}
+
+mat-card-header {
+    margin-bottom: 20px;
+}
+
+mat-card {
+    cursor: pointer;
+}

@@ -27,6 +27,7 @@ import { UserProfilComponent } from './user-profil/user-profil.component';
 import { PostComponent } from './post/post.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentViewerComponent } from './comment-viewer/comment-viewer.component';
+import { PostListComponent } from './post-list/post-list.component';
 
 const materialModules = [
   MatButtonModule,
@@ -39,7 +40,7 @@ const materialModules = [
   MatGridListModule,
   MatMenuModule,
   MatListModule,
-  MatSidenavModule
+  MatSidenavModule,
 ]
 
 @NgModule({
@@ -50,7 +51,8 @@ const materialModules = [
     UserProfilComponent,
     PostComponent,
     CommentComponent,
-    CommentViewerComponent
+    CommentViewerComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,
