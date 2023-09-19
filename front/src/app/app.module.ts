@@ -28,6 +28,7 @@ import { PostComponent } from './post/post.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentViewerComponent } from './comment-viewer/comment-viewer.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { PostFormComponent } from './post-form/post-form.component';
 
 const materialModules = [
   MatButtonModule,
@@ -52,7 +53,8 @@ const materialModules = [
     PostComponent,
     CommentComponent,
     CommentViewerComponent,
-    PostListComponent
+    PostListComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,

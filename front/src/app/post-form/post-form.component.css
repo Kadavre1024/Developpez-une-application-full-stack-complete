@@ -1,0 +1,27 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+
+}
+
+.form{
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+mat-form-field{
+    width: 250px;
+}
+
+.textarea{
+    width: 100%;
+    min-width: 250px;
+}
+
+.title {
+    margin-top: -30px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
