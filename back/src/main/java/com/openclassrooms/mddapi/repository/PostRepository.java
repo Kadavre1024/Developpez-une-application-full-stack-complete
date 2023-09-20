@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.openclassrooms.mddapi.model.Post;
 
+/**
+ * Post repository interface
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>{
 

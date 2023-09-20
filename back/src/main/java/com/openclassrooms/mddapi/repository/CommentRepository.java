@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.openclassrooms.mddapi.model.Comment;
 
+/**
+ * Comment repository interface
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 

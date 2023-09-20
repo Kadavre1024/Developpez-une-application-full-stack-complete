@@ -4,6 +4,11 @@ import java.util.List;
 
 import lombok.*;
 
+/**
+ * Topic Dto class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

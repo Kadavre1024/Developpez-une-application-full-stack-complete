@@ -17,35 +17,59 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
+/**
+ * WebSecurity configuration class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
+	/**
+	 * @see com.openclassrooms.mddapi.security.JwtFilter.java
+	 */
 	@Autowired
 	private JwtFilter jwtFilter;
 
+	/**
+	 * password encoder
+	 * @return a BCryptPasswordEncoder
+	 */
     @Bean
     PasswordEncoder passwordEncoder() {
     	return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Http security management
+     * @param http Http security
+     * @return SecurityFilterChain
+     * @throws Exception
+     */
 	@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .exceptionHandling(handling -> handling
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .authorizeHttpRequests(auth -> auth
                 		.antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+                		.antMatchers("/api/**").authenticated()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterAfter(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling(handling -> handling
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+	/**
+	 * Authentication manager
+	 * @param config Authentication configuration
+	 * @return AuthenticationManager corresponding to configuration
+	 * @throws Exception
+	 */
 	@Bean
 	AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();

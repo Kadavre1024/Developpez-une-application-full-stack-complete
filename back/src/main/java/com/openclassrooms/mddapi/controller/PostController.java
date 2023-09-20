@@ -16,21 +16,45 @@ import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.service.IPostService;
 
+/**
+ * Post Controller
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @RestController
 @RequestMapping("api/post")
 public class PostController {
 	
+	/**
+	 * @see com.openclassrooms.mddapi.mapper.PostMapper.java
+	 */
 	@Autowired
 	private PostMapper postMapper;
 	
+	/**
+	 * @see com.openclassrooms.mddapi.service.PostService.java
+	 */
 	@Autowired
 	private IPostService postService;
-
+	
+	
+	/**
+	 * Get the list of all posts
+	 * @return		httpResponse status 200 with the list of all post objects in database
+	 */
 	@GetMapping
 	public ResponseEntity<?> findAllPosts(){
 		return ResponseEntity.ok().body(postMapper.toDto(postService.findAll()));
 	}
 	
+	
+	/**
+	 * Get a post informations by id
+	 * @param id	string corresponding to the post id to get
+	 * @return		httpResponse status 200 with post Dto object if post is valid
+	 * 				else return status 404
+	 * 				or status 400 if NumberFormatException
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable("id") String id){
 		try {
@@ -46,6 +70,12 @@ public class PostController {
         }
 	}
 	
+	
+	/**
+	 * Create a new post
+	 * @param postDto	Object containing all post params for creation
+	 * @return			httpResponse status 200 with post Dto object of the created post
+	 */
 	@PostMapping()
     public ResponseEntity<?> create(@Valid @RequestBody PostDto postDto) {
         Post post = postService.create(postMapper.toEntity(postDto));

@@ -6,6 +6,11 @@ import com.openclassrooms.mddapi.model.Post;
 
 import lombok.*;
 
+/**
+ * Comment Dto class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

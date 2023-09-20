@@ -6,13 +6,17 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.*;
 import lombok.experimental.Accessors;
-//import jakarta.validation.constraints.Size;
 
+
+/**
+ * User model class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Entity
 @Table(name = "USERS", uniqueConstraints = {
     @UniqueConstraint(columnNames = "email")
@@ -32,17 +36,13 @@ public class User {
   private Long id;
 
   @NonNull
-  //@Size(max = 50)
-  //@Email
   private String email;
 
   @NonNull
- // @Size(max = 40)
   @Column(name = "user_name")
   private String userName;
 
   @NonNull
-  //@Size(max = 120)
   private String password;
 
   @CreationTimestamp

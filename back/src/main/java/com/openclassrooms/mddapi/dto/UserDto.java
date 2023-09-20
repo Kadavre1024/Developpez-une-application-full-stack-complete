@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 
 import lombok.*;
 
+/**
+ * User Dto class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -18,16 +18,36 @@ import com.openclassrooms.mddapi.mapper.CommentMapper;
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.service.CommentService;
 
+/**
+ * Comment Controller
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @RestController
 @RequestMapping("api/comment")
 public class CommentController {
 	
+	/**
+	 * @see com.openclassrooms.mddapi.mapper.CommentMapper.java
+	 */
 	@Autowired
 	private CommentMapper commentMapper;
 
+	/**
+	 * @see com.openclassrooms.mddapi.service.CommentService.java
+	 */
 	@Autowired
 	private CommentService commentService;
 	
+	
+	
+	/**
+	 * Get a comment by id
+	 * @param id	string corresponding to comment id to get
+	 * @return		httpResponse status 200 with comment Dto object
+	 * 				else return status 400 for a NumberFormatException
+	 * 				or status 404 if the id passed not corresponding to an existing comment
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findByPostId(@PathVariable("id") String id){
 		
@@ -45,6 +65,11 @@ public class CommentController {
 		
 	}
 	
+	/**
+	 * Create a new comment
+	 * @param commentDto	Object containing the comment params
+	 * @return				httpResponse status 200 with commentDto object of the created comment
+	 */
 	@PostMapping
 	public ResponseEntity<?> create(@Valid @RequestBody CommentDto commentDto){
 		Comment comment = commentService.create(commentMapper.toEntity(commentDto));

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.mapper.UserMapper;
@@ -28,28 +27,57 @@ import com.openclassrooms.mddapi.security.UserDetailsImpl;
 import com.openclassrooms.mddapi.security.UserDetailsServiceImpl;
 import com.openclassrooms.mddapi.service.UserService;
 
+/**
+ * Authentication Controller
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @RestController
 @RequestMapping("api/auth")
 public class AuthController {
 	
+	/**
+	 * @see com.openclassrooms.mddapi.security.JwtUtil.java
+	 */
 	@Autowired
 	private JwtUtil jwtUtil;
 	
+	/**
+	 * @see com.openclassrooms.mddapi.security.WebSecurityConfig.java
+	 */
 	@Autowired
 	private AuthenticationManager authManager;
 	
+	/**
+	 * @see com.openclassrooms.mddapi.security.UserDetailsServiceImpl.java
+	 */
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 
+	/**
+	 * @see com.openclassrooms.mddapi.security.WebSecurityConfig.java
+	 */
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	/**
+	 * @see com.openclassrooms.mddapi.mapper.UserMapper.java
+	 */
 	@Autowired
 	private UserMapper userMapper;
 	
+	/**
+	 * @see com.openclassrooms.mddapi.service.UserService.java
+	 */
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * Login a user
+	 * @param loginRequest	Object containing user email and password for authentication
+	 * @return				httpResponse status 200 with jwt token if authentication is valid
+	 * 						else return status 400
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequest loginRequest){
 		
@@ -74,8 +102,12 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getId(), userDetails.getName(), userDetails.getPassword()));
 	}
 	
-	
-	
+	/**
+	 * Register a new user
+	 * @param registerRequest	Object containing user email and password for authentication
+	 * @return					httpResponse status 200 with registered message if registration is valid
+	 * 							else return status 400 for an existing email address
+	 */
 	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest){
 		
@@ -94,6 +126,11 @@ public class AuthController {
 		return ResponseEntity.ok().body(new MessageResponse("User "+user.getUserName()+" is registered"));
 	}
 	
+	/*
+	 * Get user authenticated details
+	 * @param auth			Object containing authentication params
+	 * @return				httpResponse status 200 with user details
+	 */
 	@GetMapping("/me")
 	public ResponseEntity<?> getUserDetails(Authentication auth){
 		UserDto userAuth = userMapper.toDto(userService.findByEmail(auth.getName()))   ;

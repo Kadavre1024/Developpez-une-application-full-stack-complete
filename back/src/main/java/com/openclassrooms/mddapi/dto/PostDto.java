@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 
 import lombok.*;
 
-
+/**
+ * Post Dto class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

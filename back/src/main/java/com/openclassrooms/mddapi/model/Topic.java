@@ -16,6 +16,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+/**
+ * Topic model class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Entity
 @Data
 @Accessors(chain = true)

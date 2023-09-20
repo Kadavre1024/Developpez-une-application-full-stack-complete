@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import com.openclassrooms.mddapi.model.User;
 
+/**
+ * User repository interface
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
 	

@@ -15,27 +15,56 @@ import com.openclassrooms.mddapi.dto.TopicDto;
 import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.service.ITopicService;
 
+/**
+ * Topic Controller
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @RestController
 @RequestMapping("api/topic")
 public class TopicController {
 	
+	/**
+	 * @see com.openclassrooms.mddapi.mapper.TopicMapper.java
+	 */
 	@Autowired
 	private TopicMapper topicMapper;
 	
+	/**
+	 * @see com.openclassrooms.mddapi.service.TopicService.java
+	 */
 	@Autowired
 	private ITopicService topicService;
 
+	
+	/**
+	 * Get the list of all topics
+	 * @return		httpResponse status 200 with the list of all topics in the database
+	 */
 	@GetMapping("/all")
 	public List<TopicDto> getTopics() {
-		System.out.println(topicService.getTopics());
 		return topicMapper.toDto(topicService.getTopics());
 	}
 	
+	
+	/**
+	 * Get a topic by id
+	 * @param id	string corresponding to a topic id to find
+	 * @return		httpResponse status 200 with topic Dto object of the found topic
+	 */
 	@GetMapping("/{id}")
 	public TopicDto getTopicById(@PathVariable("id") String id) {
 		return topicMapper.toDto(topicService.findById(Long.parseLong(id)));
 	}
 	
+	
+	/**
+	 * Subscribe to a topic
+	 * @param id		string corresponding to a topic id to subscribe
+	 * @param userId	string corresponding to a user id to subscribe
+	 * @return			httpResponse status 200 if subscription is valid
+	 * 					else return status 400 for a NumberFormatException
+	 */
 	@PostMapping("{id}/subscribe/{userId}")
     public ResponseEntity<?> subscribe(@PathVariable("id") String id, @PathVariable("userId") String userId) {
         try {
@@ -46,7 +75,15 @@ public class TopicController {
             return ResponseEntity.badRequest().build();
         }
     }
-
+	
+	
+	/**
+	 * Unsubscribe to a topic
+	 * @param id		string corresponding to a topic id to unsubscribe
+	 * @param userId	string corresponding to a user id to unsubscribe
+	 * @return			httpResponse status 200 if unsubscription is valid
+	 * 					else return status 400 for a NumberFormatException
+	 */
     @DeleteMapping("{id}/subscribe/{userId}")
     public ResponseEntity<?> unsubscribe(@PathVariable("id") String id, @PathVariable("userId") String userId) {
         try {

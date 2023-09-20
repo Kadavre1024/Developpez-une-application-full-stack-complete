@@ -2,6 +2,11 @@ package com.openclassrooms.mddapi.payload;
 
 import lombok.Data;
 
+/**
+ * JwtResponse payload class
+ * @author Guillaume Belaud
+ * @version 0.1
+ */
 @Data
 public class JwtResponse {
 	  private String token;
