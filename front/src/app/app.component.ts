@@ -7,6 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from './core/services/auth.service';
 import { User } from './core/interfaces/user.interface';
+import { AuthSuccess } from './core/interfaces/authSuccess.interface';
+import { Login } from './core/interfaces/login.interface';
 
 @Component({
   selector: 'app-root',
@@ -64,6 +66,23 @@ export class AppComponent implements OnInit {
         this.sessionService.logIn(user);
       },
       error: error => {
+        if(localStorage.getItem('loginRegister')){
+          try{
+            localStorage.removeItem('token');
+            this.authService.login(JSON.parse(localStorage.getItem('loginRequest')!) as Login).subscribe({
+              next: (response: AuthSuccess) => {
+                  localStorage.setItem('token', response.token);
+              },
+              error: () => {
+                console.log('intercept login failed');
+                this.sessionService.logOut();
+              }
+            });
+          }catch{
+            this.sessionService.logOut();
+            console.log('intercept failed')
+          }
+        }
         this.sessionService.logOut();
       }
     })

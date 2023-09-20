@@ -17,10 +17,6 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
-import { UserProfilModule } from './user-profil/user-profil.module';
-import { TopicModule } from './topic/topic.module';
-import { AuthModule } from './auth/auth.module';
-import { PostCommentModule } from './post-comment/post-comment.module';
 
 const materialModules = [
   MatButtonModule,

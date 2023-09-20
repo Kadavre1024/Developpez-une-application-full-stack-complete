@@ -42,10 +42,10 @@ export class AuthComponent {
   }
 
   public ngOnInit(): void {
-    if(localStorage.getItem('loginRegister')){
+    if(localStorage.getItem('loginRequest')){
       try{
         this.rememberMe = true;
-        const loginRequest=JSON.parse(localStorage.getItem('loginRegister')!);
+        const loginRequest=JSON.parse(localStorage.getItem('loginRequest')!);
         this.authService.login(loginRequest).subscribe({
           next: (response: AuthSuccess) => {
               localStorage.setItem('token', response.token);
@@ -118,7 +118,7 @@ export class AuthComponent {
               next: (response) => {
                 this.sessionService.logIn(response);
                 if(this.form.controls['rememberMe'].value){
-                  localStorage.setItem('loginRegister', JSON.stringify(loginRequest));
+                  localStorage.setItem('loginRequest', JSON.stringify(loginRequest));
                 }
                 this.router.navigate(['/profil'])
               },

@@ -4,10 +4,12 @@ import { catchError, throwError } from "rxjs";
 import { AuthService } from "../services/auth.service";
 import { Login } from "../interfaces/login.interface";
 import { AuthSuccess } from "../interfaces/authSuccess.interface";
+import { SessionService } from "../services/session.service";
 
 @Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private sessionService: SessionService) {}
 
   public intercept(request: HttpRequest<any>, next: HttpHandler) {
     const token = localStorage.getItem('token');
@@ -25,22 +27,29 @@ export class JwtInterceptor implements HttpInterceptor {
           console.log('Client side error');
         } else {
           console.log('Server side error');
-          if(error.status === 500 || error.status === 401){
+          if(error.status === 500){
             console.log('intercept login try')
             try{
+              localStorage.removeItem('token');
+              console.log("Saved loginRequest : " + localStorage.getItem('loginRequest'));
               this.authService.login(JSON.parse(localStorage.getItem('loginRequest')!) as Login).subscribe({
                 next: (response: AuthSuccess) => {
                     localStorage.setItem('token', response.token);
+                    window.location.reload();
                 },
-                error: () => console.log('intercept login failed')
+                error: () => {
+                  console.log('intercept login failed');
+                  this.sessionService.logOut();
+                }
+                
               });
             }catch{
-              console.log('intercept login failed')
+              console.log('intercept failed');
+              this.sessionService.logOut();
             }
           }
           errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
         }
-        console.log(errorMsg);
         return throwError(() => errorMsg);
       })
     );
