@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/guards/auth.guard';
-import { UnauthGuard } from './auth/guards/unauth.guard';
-import { HomeComponent } from './home/home.component';
-import { AuthComponent } from './auth/auth.component';
-import { TopicComponent } from './topic/topic.component';
-import { UserProfilComponent } from './user-profil/user-profil.component';
-import { PostComponent } from './post/post.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { UnauthGuard } from './core/guards/unauth.guard';
+
+import { HomeComponent } from './core/components/home/home.component';
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
+
 
 const routes: Routes = [
   {
@@ -15,25 +14,27 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'auth/:funct',
+    path: 'auth',
     canActivate: [UnauthGuard],
-    component: AuthComponent
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'profil',
     canActivate: [AuthGuard],
-    component: UserProfilComponent
+    loadChildren: () => import('./user-profil/user-profil.module').then(m => m.UserProfilModule)
   },
   {
     path: 'topic',
     canActivate: [AuthGuard],
-    component: TopicComponent
+    loadChildren: () => import('./topic/topic.module').then(m => m.TopicModule)
   },
   {
-    path: 'post/:id',
+    path: 'post',
     canActivate: [AuthGuard],
-    component: PostComponent
-  }
+    loadChildren: () => import('./post-comment/post-comment.module').then(m => m.PostCommentModule)
+  },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '404' }
 
 ];
 

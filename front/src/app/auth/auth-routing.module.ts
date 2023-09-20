@@ -1,0 +1,19 @@
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { UnauthGuard } from "../core/guards/unauth.guard";
+import { AuthComponent } from "./components/auth.component";
+
+const routes: Routes = [
+    {
+      path: ':funct',
+      canActivate: [UnauthGuard],
+      component: AuthComponent
+    },
+  
+  ];
+
+@NgModule({
+    imports:[ RouterModule.forChild(routes) ],
+    exports:[ RouterModule ]
+})
+export class AuthRoutingModule {}

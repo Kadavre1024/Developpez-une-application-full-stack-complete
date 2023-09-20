@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SessionService } from './services/session.service';
+import { SessionService } from './core/services/session.service';
 import { Observable } from 'rxjs';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material/sidenav';
-import { AuthService } from './auth/services/auth.service';
-import { User } from './interfaces/user.interface';
+import { AuthService } from './core/services/auth.service';
+import { User } from './core/interfaces/user.interface';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
       this.autoLog();
-      console.log("isLoggedStorage " + localStorage.getItem("isLogged"))
   }
 
   navBarOpened(event: any) {
