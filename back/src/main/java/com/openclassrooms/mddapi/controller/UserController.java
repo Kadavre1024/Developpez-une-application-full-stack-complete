@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +42,12 @@ public class UserController {
 	 */
 	@Autowired
 	private UserService service;	
+	
+	/**
+	 * @see com.openclassrooms.mddapi.security.WebSecurityConfig.java
+	 */
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	/**
 	 * Get a user details by id
@@ -89,6 +96,7 @@ public class UserController {
             
             user.setUserName(updatedUser.getUserName());
             user.setEmail(updatedUser.getEmail());
+            user.setPassword(encoder.encode(updatedUser.getPassword()));
             service.register(user);
             
     		return ResponseEntity.ok().body(new MessageResponse("Successful update !"));

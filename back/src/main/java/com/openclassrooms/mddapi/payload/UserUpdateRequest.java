@@ -16,4 +16,7 @@ public class UserUpdateRequest {
 	
 	@NonNull
 	private String email;
+	
+	@NonNull
+	private String password;
 }
