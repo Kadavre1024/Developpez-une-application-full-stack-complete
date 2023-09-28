@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -21,7 +24,7 @@ import io.jsonwebtoken.ExpiredJwtException;
  * @version 0.1
  */
 @Component
-public class JwtFilter extends OncePerRequestFilter {
+public class JwtFilter extends GenericFilterBean {
 
 	/**
 	 * @see com.openclassrooms.mddapi.security.UserDetailsServiceImpl.java
@@ -38,14 +41,16 @@ public class JwtFilter extends OncePerRequestFilter {
     
     /**
 	 * Jwt filter authentication
-	 * 		get the jwt contained in the http header to try to authenticate user
+	 * get the jwt contained in the http header to try to authenticate user
 	 * @param request		HttpServletRequest
 	 * @param response		HttpServletResponse
-	 * @param filterChain	Object containing the entire filter chain
+	 * @param chain	Object containing the entire filter chain
 	 */
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, ExpiredJwtException {
-        String authHeader = request.getHeader("Authorization");
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException, ExpiredJwtException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		String authHeader = httpRequest.getHeader("Authorization");
         String token = null;
         String username = null;
 
@@ -57,19 +62,21 @@ public class JwtFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetailsImpl userDetails = (UserDetailsImpl) userDetailsService.loadUserByUsername(username);
             try {
+            	System.out.println("Jwt ERROR");
             	if (jwtUtil.validateToken(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     System.out.println("Authentication : " + authenticationToken);
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }catch(ExpiredJwtException e) {
-            	response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
+            	System.out.println("Jwt ERROR");
+            	((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED); 
             	
             }
             
         }
 
-        filterChain.doFilter(request, response);
-
-    }
+        chain.doFilter(request, response);
+		
+	}
 }
