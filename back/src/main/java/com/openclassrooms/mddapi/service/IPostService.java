@@ -6,7 +6,6 @@ import com.openclassrooms.mddapi.model.Post;
 
 /**
  * Post service interface
- * @see com.openclassrooms.mddapi.service.PostService.java
  * @author Guillaume Belaud
  * @version 0.1
  */

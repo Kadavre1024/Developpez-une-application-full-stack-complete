@@ -6,7 +6,6 @@ import com.openclassrooms.mddapi.model.Topic;
 
 /**
  * Topic service interface
- * @see com.openclassrooms.mddapi.service.TopicService.java
  * @author Guillaume Belaud
  * @version 0.1
  */

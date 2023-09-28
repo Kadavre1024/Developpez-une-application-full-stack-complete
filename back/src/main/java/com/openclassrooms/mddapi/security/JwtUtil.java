@@ -49,7 +49,7 @@ public class JwtUtil {
     /**
 	 * Extract the claims included into a jwt
 	 * @param token				jwt
-	 * @param claimResolver		function of part of token to be extract
+	 * @param claimsResolver		function of part of token to be extract
 	 * @return					part of token to be extract
 	 */	
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
