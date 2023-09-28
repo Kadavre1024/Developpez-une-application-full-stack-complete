@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { UserProfilRoutingModule } from './user-profil-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -18,6 +19,7 @@ import { UserProfilRoutingModule } from './user-profil-routing.module';
     CommonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatButtonModule,
     FormsModule,

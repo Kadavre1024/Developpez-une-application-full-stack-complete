@@ -14,6 +14,11 @@ import { Topic } from '../../../core/interfaces/topic.interface';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
+/**
+ * Post component class
+ * @author Guillaume Belaud
+ * @version 0.0.1
+ */
 export class PostComponent implements OnInit {
   public post$!: Observable<Post>;
   public author$!: Observable<User>;
@@ -27,6 +32,10 @@ export class PostComponent implements OnInit {
     private sessionService: SessionService,
     private route: ActivatedRoute) { }
 
+  /**
+   * On init, get the post details related by the postId
+   * and get the user and topic related by this post
+   */
   ngOnInit(): void {
     this.post$ = this.postService.getById(this.postId);
     this.post$.pipe(take(1)).subscribe(x => {
@@ -35,6 +44,9 @@ export class PostComponent implements OnInit {
     })
   }
 
+  /**
+   * Return to previous page
+   */
   public back() {
     window.history.back();
   }

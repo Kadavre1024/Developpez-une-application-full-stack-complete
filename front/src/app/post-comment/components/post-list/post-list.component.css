@@ -31,7 +31,8 @@
 
 .ellipsis {
     display: -webkit-box;
-    max-width:fit-content;
+    font-size: 14px;
+    /**max-width:fit-content;*/
     text-align: justify;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -41,7 +42,7 @@
 
 mat-card-content{
     margin-bottom: 20px;
-    font-size: medium;
+    
 }
 
 mat-card-header {

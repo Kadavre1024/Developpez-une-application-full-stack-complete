@@ -14,6 +14,11 @@ import { Topic } from '../../../core/interfaces/topic.interface';
   templateUrl: './post-form.component.html',
   styleUrls: ['./post-form.component.css']
 })
+/**
+ * PostForm component class
+ * @author Guillaume Belaud
+ * @version 0.0.1
+ */
 export class PostFormComponent implements OnInit {
 
   public onError = false;
@@ -44,10 +49,17 @@ export class PostFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Return to previous page
+   */
   public back() {
     window.history.back();
   }
 
+  /**
+   * When submit button pressed, call the postService create to create
+   * the new post. Then navigate to post list page
+   */
   submit(){
     this.newPost = this.form?.value as Post;
     this.newPost.user_id = this.sessionService.user!.id;

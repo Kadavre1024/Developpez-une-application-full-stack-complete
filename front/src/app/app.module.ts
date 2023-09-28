@@ -17,6 +17,10 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 
 import { CoreModule } from './core/core.module';
+import { UserProfilModule } from './user-profil/user-profil.module';
+import { TopicModule } from './topic/topic.module';
+import { PostCommentModule } from './post-comment/post-comment.module';
+import { AuthModule } from './auth/auth.module';
 
 const materialModules = [
   MatButtonModule,
@@ -40,6 +44,10 @@ const materialModules = [
     AppRoutingModule, 
     CommonModule,
     CoreModule,
+    UserProfilModule,
+    TopicModule,
+    PostCommentModule,
+    AuthModule,
     ...materialModules
   ],
   bootstrap: [AppComponent]

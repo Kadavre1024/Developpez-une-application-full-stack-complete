@@ -7,6 +7,13 @@
         <mat-form-field>
             <input matInput placeholder="Changer d'email" formControlName="email">
         </mat-form-field>
+        <mat-form-field>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Changement du mot de passe" formControlName="password">
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [disabled]="disableSaveChangesBtn()">
             <span>Sauvegarder</span>
         </button>

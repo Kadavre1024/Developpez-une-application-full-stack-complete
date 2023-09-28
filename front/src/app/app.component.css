@@ -10,3 +10,7 @@
     float:right;
     height: max-content;
 }
+
+mat-nav-list a.active-link {
+    color: rgb(123, 123, 212);
+}

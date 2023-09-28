@@ -11,6 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './comment-viewer.component.html',
   styleUrls: ['./comment-viewer.component.css']
 })
+/**
+ * CommentViewer component class
+ * @author Guillaume Belaud
+ * @version 0.0.1
+ */
 export class CommentViewerComponent implements OnInit {
   @Input() post$!: Observable<Post>;
 
@@ -31,6 +36,10 @@ export class CommentViewerComponent implements OnInit {
               private sessionService: SessionService,
               private matSnackBar: MatSnackBar) { }
 
+  /**
+   * On init, take the comment list related by the present post
+   * and take the authenticate user id, and post id
+   */
   ngOnInit(): void {
     this.post$.subscribe(x=>{
       this.commentList$ = this.commentService.getAllByPostId(x.id);
@@ -39,6 +48,10 @@ export class CommentViewerComponent implements OnInit {
     })
   }
 
+  /**
+   * When submit button is pressed, if the text field is not empty
+   * call commentService.create to create a new comment
+   */
   public submit(){
     if(this.newComment.text !== ""){
       this.commentService.create(this.newComment).pipe(take(1)).subscribe({

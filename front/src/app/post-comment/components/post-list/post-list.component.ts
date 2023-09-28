@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
+/**
+ * PostList component class
+ * @author Guillaume Belaud
+ * @version 0.0.1
+ */
 export class PostListComponent implements OnInit {
 
   public filteredPosts: Post[] = [];
@@ -32,6 +37,10 @@ export class PostListComponent implements OnInit {
     private router: Router
   ) { }
 
+  /**
+   * On init, verify the screen size to adapt the DOM,
+   * and get the list of all user subscribed topics
+   */
   ngOnInit(): void {
     this.mybreakpoint = (window.innerWidth <= 600) ? 1 : 2;
     this.descriptionRowsView = (window.innerWidth <= 600) ? 4 : 3;
@@ -40,22 +49,38 @@ export class PostListComponent implements OnInit {
     this.topicApiService.all().subscribe((x) => this.getPostsForUser(x));
   }
 
+  /**
+   * Verify the screen size to adapt the DOM
+   * @param event
+   */
   handleSize(event: any) {
     this.mybreakpoint = (event.target.innerWidth <= 600) ? 1 : 2;
     this.descriptionRowsView = (window.innerWidth <= 600) ? 4 : 3;
     this.descriptionHeightView = (window.innerWidth <= 600) ? 55 : 40;
   }
 
+  /**
+   * Get topic details by its id
+   * @param topicId number corresponding to the related topic
+   * @returns an observable containing the finding topic details
+   */
   public getTopicName(topicId: number): Observable<Topic> {
     let topicName$ : Observable<Topic>;
     topicName$ = this.topicApiService.detail(topicId.toString())
     return topicName$;
   }
 
+  /**
+   * Function to redirect to post create page
+   */
   public redirectToCreate(){
     this.router.navigate(['/post/create']);
   }
 
+  /**
+   * Get the Post list corresponding to user subscribed topics
+   * @param topics list of topics
+   */
   private getPostsForUser(topics : Topic[]): void{
     const topic_id_list: number[] = [];
     topics.forEach((topic) => {
@@ -70,6 +95,9 @@ export class PostListComponent implements OnInit {
     );      
   }
 
+  /**
+   * Sort the post list by clicking on the sort button
+   */
   dataSort(){
     switch (this.orderSort){
       case '':{
@@ -88,6 +116,14 @@ export class PostListComponent implements OnInit {
     this.topicApiService.all().subscribe((x) => this.getPostsForUser(x));
   }
 
+  /**
+   * Sort the post list :
+   * - by date (asc or desc)
+   * - by default (by topics)
+   * @param posts posts list
+   * @param direction sort function
+   * @returns sorted post list
+   */
   public postOrderBy(posts: Post[], direction?: string): Post[]{
     let filteredList: Post[] = [];
     switch (direction) {

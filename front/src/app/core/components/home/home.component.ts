@@ -6,6 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+/**
+ * Home component class
+ * @author Guillaume Belaud
+ * @version 0.0.1
+ */
 export class HomeComponent implements OnInit {
   private registerParam: string = "register";
   private loginParam: string = "login";

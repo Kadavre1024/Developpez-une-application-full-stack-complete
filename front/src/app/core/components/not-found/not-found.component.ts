@@ -6,6 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.css']
 })
+
+/**
+ * Not Found component class
+ * @author Guillaume Belaud
+ * @version 0.0.1
+ */
 export class NotFoundComponent implements OnInit {
 
   constructor(private router: Router) { }

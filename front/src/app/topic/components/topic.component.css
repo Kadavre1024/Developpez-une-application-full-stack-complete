@@ -1,9 +1,10 @@
 mat-card{
     background-color: beige;
 }
+
 .ellipsis {
     display: -webkit-box;
-    max-width:fit-content;
+    max-width:max-content;
     text-align: justify;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
