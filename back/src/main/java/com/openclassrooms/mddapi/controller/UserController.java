@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,13 @@ public class UserController {
 	 */
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@GetMapping("/all")
+    public ResponseEntity<?> findAll() {
+        List<User> userList = service.findAll();
+
+        return ResponseEntity.ok().body(mapper.toDto(userList));
+    }
 	
 	/**
 	 * Get a user details by id
@@ -135,5 +143,7 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+    
+    
 
 }

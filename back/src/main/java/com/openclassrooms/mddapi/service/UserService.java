@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.model.User;
@@ -29,6 +31,14 @@ public class UserService {
 	 */
 	public User findById(Long userId) {
 		return userRepository.findById(userId).orElse(null);
+	}
+	
+	/**
+	 * Find all users
+	 * @return the finding User object
+	 */
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	/**
