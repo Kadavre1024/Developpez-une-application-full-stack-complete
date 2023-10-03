@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, take } from 'rxjs';
 import { Topic } from '../../../core/interfaces/topic.interface';
 import { PostService } from '../../../core/services/post-api.service';
 import { SessionService } from '../../../core/services/session.service';
@@ -7,6 +7,7 @@ import { TopicApiService } from '../../../core/services/topic-api.service';
 import { Post } from '../../interfaces/post.interface';
 import { User } from '../../../core/interfaces/user.interface';
 import { Router } from '@angular/router';
+import { UserApiService } from 'src/app/core/services/user-api.service';
 
 @Component({
   selector: 'app-post-list',
@@ -25,6 +26,7 @@ export class PostListComponent implements OnInit {
   public userPosts$!: Observable<Post[]>;
   public topicName: Array<string> = [];
   public orderSort: string = '';
+  public userList: User[] = [];
   
   public user: User = this.sessionService.user!;
   public mybreakpoint: number = 1;
@@ -33,6 +35,7 @@ export class PostListComponent implements OnInit {
 
   constructor(private postService: PostService,
     private topicApiService: TopicApiService,
+    private userService: UserApiService,
     private sessionService: SessionService,
     private router: Router
   ) { }
@@ -47,6 +50,9 @@ export class PostListComponent implements OnInit {
     this.descriptionHeightView = (window.innerWidth <= 600) ? 55 : 40;
 
     this.topicApiService.all().subscribe((x) => this.getPostsForUser(x));
+    this.userService.getAllUsers().pipe(take(1)).subscribe((list) => {
+      this.userList = list;
+    })
   }
 
   /**
@@ -141,6 +147,16 @@ export class PostListComponent implements OnInit {
       } 
     }
     return filteredList;
+  }
+
+  /**
+   * Get the author name of a post
+   * @param id author id
+   * @returns author name if found else unknown
+   */
+  public getPostUser(id: number): String {
+    const user = this.userList.find((x) => {return x.id === id});
+  return user? user.userName : "inconnu";
   }
 }
 

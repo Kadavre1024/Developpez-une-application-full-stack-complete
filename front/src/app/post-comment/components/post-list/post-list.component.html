@@ -16,7 +16,8 @@
             <mat-card-title class="title">{{post.title}}</mat-card-title>
             <mat-card-subtitle class="details">
                 <p>{{post.createdAt | date: 'dd MMM yyyy'}}</p>
-                <p>Auteur : {{user.userName}}</p>
+                <!--<p>Auteur : {{getPostUser(post.user_id)}}</p>-->
+                <p>Auteur : {{getPostUser(post.user_id)}}</p>
             </mat-card-subtitle>
             <mat-card-content style="min-height: 56px;">
                 <p class="ellipsis" [ngStyle]="{'-webkit-line-clamp': descriptionRowsView}">{{post.text}}</p>

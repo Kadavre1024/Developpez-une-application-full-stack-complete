@@ -41,4 +41,12 @@ export class UserApiService{
     public getUser(id:number): Observable<User> {
         return this.httpClient.get<User>(`${this.pathService}/${id}`);
     }
+
+    /**
+    * Send http request to server to get all users details
+    * @returns the server response with users details list
+    */
+    public getAllUsers(): Observable<User[]> {
+        return this.httpClient.get<User[]>(`${this.pathService}/all`);
+    }
 }
